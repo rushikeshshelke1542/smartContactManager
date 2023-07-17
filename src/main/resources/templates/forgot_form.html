@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Forgot Password</title>
+</head>
+<body>
+    <section>
+      <div class="container">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>Change Your Password</h3>
+
+                        <div th:if="${session.message}" style="width: 350px;" class="container text-center">
+                            <div  th:classappend="${session.message.type}" class="alert">
+                                <span th:text="${session.message.content}" class="text-center"></span>
+                                <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                               </div>
+                            </div>
+
+                        <form th:action="@{/forgot-password}" method="post">
+
+                            <div style="width: 350px; align-items: center;" class="form-group mt-3 container text-center">
+                                <input name="email" type="text" class="form-control text-center" placeholder="Enter Your Registered Email ID" required>
+                            </div> 
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-white"> Send OTP </button>
+                                <button type="reset" class="btn btn-danger"> Reset </button>
+                             </div>
+                           
+                        </form>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+   
+</body>
+</html>
+
+
+
+
+  

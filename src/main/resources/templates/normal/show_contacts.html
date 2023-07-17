@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <title>User Dashboard</title>
+
+</head>
+<body>
+    <section>
+       <div class="card mr-3">
+        <div class="card-body">
+            <h1 class="text-center"> Your Contacts </h1>
+
+            <!-- session message -->
+            <div th:if="${session.message}"  class="container text-center col-md-8 offset-md-2">
+                <div  th:classappend="${session.message.type}" class="alert">
+                    <span th:text="${session.message.content}"></span>
+                    <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                   </div>
+                </div>
+
+                <!-- Search  -->
+
+                <div class="search-container my-2">
+
+                    <input onkeyup="search()" id="search-input" type="text" class="form-control" placeholder="Search your contacts here...">
+                    <div class="search-result">
+
+                    </div>
+
+                </div>
+
+
+            <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Action</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="c : ${contacts}">
+                    <th scope="row" th:text="${'DSCM206'+c.cId}"></th>
+                    <td >
+                        <img src="" class="profile_image" th:src="@{'/img/'+${c.image}}" alt="profile photo">
+                        <a href="" th:href="@{'/user/'+${c.cId}+'/contacts'}">
+                        <span style="color: black; text-decoration: underline;" th:text="${c.name}"></span></td>
+                    <td>
+                        <span th:text="${c.email}"></span>
+                    </td>
+
+
+                    <td th:text="${c.phone}"></td>
+                    <td>
+                        <a th:onclick="|deleteContact(${c.cId})|" class="btn text-white btn-danger btn-sm">Delete</a> 
+
+                        <!-- using form tag so we can use post method -->
+                        <form th:action="@{'/user/update-contact/'+${c.cId}}" method="post" class="mt-2">
+                            <button type="submit"  class="btn bg-primary text-white btn-sm">Update</button>
+                        </form>
+                        
+                    </td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                  <li th:if="${currentPage != 0 }" class="page-item"><a class="page-link" th:href="@{'/user/show-contacts/'+${currentPage-1}}" href="#">Previous</a></li>
+
+                  <!-- Apply for loop so we get pages according to totalpage -->
+                  <li th:classappend="${currentPage==i-1?'active':''}" th:each="i: ${#numbers.sequence(1,totalPage+1)}" class="page-item"><a class="page-link" th:href="@{'/user/show-contacts/'+${i-1}}" href="#"><span th:text="${i}"></span></a></li>
+                  <li th:if="${currentPage+1 != totalPage }" class="page-item"><a class="page-link" th:href="@{'/user/show-contacts/'+${currentPage+1}}" href="#">Next</a></li>
+                </ul>
+              </nav>
+        </div>
+       </div>
+    </section>
+
+   
+
+   
+</body>
+</html>

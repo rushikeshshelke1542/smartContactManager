@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <section>
+        <div class="card col-md-10 offset-md-1">
+            <div class="card-body bg-primary">
+                <h1 id = "contact_title" class="text-center text-white font-weight-bold">ADD CONTACTS</h1>
+                <div th:if="${session.message}"  class="container text-center col-md-8 offset-md-2">
+                <div  th:classappend="${session.message.type}" class="alert">
+                    <span th:text="${session.message.content}"></span>
+                    <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                   </div>
+                </div>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-8 offset-md-2">
+                            <form th:object="${contact}" enctype="multipart/form-data" method="POST" th:action="@{/user/process-contact}">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text mr-3">
+                                            <i class="fa fa-plus"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="name" placeholder="Enter Your Name Here" class="form-control" required minlength="3"/>
+                                </div>
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text mr-3">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="secondName" placeholder="Enter Your Nick Name Here" class="form-control"/>
+                                </div>
+
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text mr-3">
+                                            <i class="fa fa-phone"></i>
+                                        </div>
+                                    </div>
+                                    <input type="tel" name="phone" placeholder="Enter Your phone Number Here" class="form-control" pattern="\d{10}" title="Please enter a 10-digit phone number without any spaces or special characters"required/>
+                                </div>
+
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text mr-3">
+                                            <i>@</i>
+                                        </div>
+                                    </div>
+                                    <input type="email" name="email" placeholder="Enter Your Email Here" class="form-control" required minlength="3"/>
+                                </div>
+
+                                <div class="input-group mt-3">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text mr-3">
+                                            <i class="fa fa-briefcase"></i>
+                                        </div>
+                                    </div>
+                                    <input type="text" name="work" placeholder="Enter Your Profession" class="form-control"/>
+                                </div>
+                                
+                                <div class="form-group mt-3">
+                                    <textarea id="mytextarea" name="description" class="form-control" placeholder="Enter Description Here" rows="10"></textarea>
+                                </div>
+
+                                <div class="custom-file">
+                                    <input class="text-white" type="file" name="profileImage"/>
+                                </div>
+
+                                <div class="container text-center">
+                                    <button class="btn btn-dark">Save Contact</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+        <script>
+            tinymce.init({
+              selector: '#mytextarea'
+            });
+          </script>
+    </section>
+   
+</body>
+</html>

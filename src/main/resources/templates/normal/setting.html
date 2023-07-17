@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>User Dashboard</title>
+</head>
+<body>
+    <section>
+      <div class="container">
+        <div class="rows">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h3>Change Your Password</h3>
+
+                        <div th:if="${session.message}"  class="container text-center col-md-6 offset-md-4">
+                            <div style="width: 325px;" th:classappend="${session.message.type}" class="alert">
+                                <span th:text="${session.message.content}"></span>
+                                <th:block th:text="${@sessionHelper.removeMessageFromSession()}"></th:block>
+                               </div>
+                            </div>
+
+                        <form th:action="@{/user/change-password}" method="post">
+
+                            <div style="width: 350px; align-items: center;" class="form-group mt-3 container text-center">
+                                <input name="oldPassword" type="text" class="form-control text-center" placeholder="Enter Your Old Password" required>
+                            </div>
+
+                            <div style="width: 350px; align-items: center;" class="form-group mt-3 container text-center">
+                                <input name="newPassword" type="text" class="form-control text-center" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$"  title="Password must contain:&#10;At least one uppercase letter.&#10;At least one lowercase letter.&#10;At least one digit.&#10;At least one special character (@#$%^&+=).&#10;Minimum length of 8 characters."   placeholder="Enter Your New Password" required>
+                            </div>
+
+                            <div class="container text-center">
+                                <button type="submit" class="btn bg-primary text-white"> Submit </button>
+                                <button type="reset" class="btn btn-danger"> Reset </button>
+                             </div>
+                           
+                        </form>
+                       
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </section>
+   
+</body>
+</html>
+
+
+
+
+  
