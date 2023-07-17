@@ -42,7 +42,7 @@ spring.datasource.password=your_mysql_password
 ```
 4. Do the SMTP Server Configuration
 
-##Technologies Used
+## Technologies Used
 
 Spring Boot
 Spring Security
