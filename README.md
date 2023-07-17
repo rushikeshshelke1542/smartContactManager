@@ -8,9 +8,7 @@ Smart Contact Manager is a web application built using Spring Boot that allows u
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+
 
 ## Features
 
@@ -44,10 +42,11 @@ spring.datasource.password=your_mysql_password
 
 ## Technologies Used
 
-Spring Boot
-Spring Security
-Spring Data JPA
-Thymeleaf (for server-side HTML rendering)
-MySQL (Database)
-JavaMail (for email verification)
+1. Spring Boot
+2. Spring Security
+3. Spring Data JPA
+4. Thymeleaf (for server-side HTML rendering)
+5. MySQL (Database)
+6. JavaMail (for email verification)
+
 
